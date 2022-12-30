@@ -37,7 +37,7 @@
                 </div>
                 <div class="row text-center">
                     <div class="col">
-                        <input type="file" class="form-control uploader" id="customFile" onchange="loadFile1(event) ; attachcropper(event)" />
+                        <input type="file" class="form-control uploader" id="customFile" onchange="loadFile1(event)" />
                     </div>
                     <div class="col">
                         <select id="inputState1" class="form-control">
@@ -85,12 +85,4 @@
         </div>
     </div>
 </body>
-<script>
-    var attachcropper=function(event){
-        var image = document.getElementById('img3');
-        crop1= Jcrop.attach(image);
-	    console.log(crop1);
-	
-    }
-</script>
 </html>

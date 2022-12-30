@@ -6,8 +6,8 @@ var loadFile1 = function(event) {
 	var image2 = document.getElementById('imgtry');
 	var result = document.getElementById('result');
 	image.src = URL.createObjectURL(event.target.files[0]);
-	var image = document.getElementById('img4');
-	crop1= Jcrop.attach(image);	
+	var image4 = document.getElementById('img4');
+	crop1= Jcrop.attach(image4);	
 	var xhr=new XMLHttpRequest();
     var fd=new FormData();
 	fd.append("image1",event.target.files[0],event.target.files[0].filename);
@@ -34,10 +34,6 @@ var loadFile2 = function(event) {
  	var image = document.getElementById('img2');
 
 	image.src = URL.createObjectURL(event.target.files[0]);
-
-
-
-    
 };
 	
 
