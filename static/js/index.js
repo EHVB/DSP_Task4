@@ -1,8 +1,13 @@
 
+
 var loadFile1 = function(event) {
 	console.log(event.target.files.length);
  	var image = document.getElementById('img1');
+	var image2 = document.getElementById('imgtry');
+	var result = document.getElementById('result');
 	image.src = URL.createObjectURL(event.target.files[0]);
+	var image = document.getElementById('img4');
+	crop1= Jcrop.attach(image);	
 	var xhr=new XMLHttpRequest();
     var fd=new FormData();
 	fd.append("image1",event.target.files[0],event.target.files[0].filename);
