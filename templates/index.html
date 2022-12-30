@@ -12,6 +12,7 @@
         crossorigin="anonymous"></script>
     <title>Image Processing</title>
     <link rel="stylesheet" href="../static/css/index.css">
+    <script src="{{url_for('static', filename='js/index.js')}}"></script>
 </head>
 
 <body>
@@ -25,14 +26,14 @@
 
             <div class="col-sm">
                 <div class="text-top">
-                    <img src="../static/images/img5.jpg" class="rounded image" alt="...">
+                    <img src="../static/images/img5.jpg" class="rounded image" id="img1"  alt="...">
                 </div>
                 <div class="row text-center">
                     <div class="col">
-                        <input type="file" class="form-control" id="customFile" />
+                        <input type="file" class="form-control" id="customFile" onchange="loadFile1(event)" />
                     </div>
                     <div class="col">
-                        <select id="inputState" class="form-control">
+                        <select id="inputState1" class="form-control">
                             <option selected>Magnitude</option>
                             <option>Phase</option>
                         </select>
@@ -45,14 +46,14 @@
 
             <div class="col-sm">
                 <div class="text-top">
-                    <img src="../static/images/img6.jpg" class="rounded image" alt="...">
+                    <img src="../static/images/img6.jpg" class="rounded image" alt="..." id="img2">
                 </div>
                 <div class="row text-center">
                     <div class="col">
-                        <input type="file" class="form-control" id="customFile" />
+                        <input type="file" class="form-control" id="customFile2" onchange="loadFile2(event)" />
                     </div>
                     <div class="col">
-                        <select id="inputState" class="form-control">
+                        <select id="inputState2" class="form-control">
                             <option selected>Phase</option>
                             <option>Magnitude</option>
                         </select>
