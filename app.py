@@ -36,19 +36,19 @@ def merge(img1mode,img2mode):
    
     for x in range (0,img1_mag.shape[0]):
         for y in range(0,img1_mag.shape[1]):
-            if (x>=session['x1'] and x<=session['x1']+session['h1'])and(
-                y>=session['y1'] and y<=session['y1']+session['w1']):
+            if (x>=int(session['x1']*(61/41)) and x<=int((session['x1']+session['h1'])*(61/41)))and(
+                y>=int(session['y1']*(64/43)) and y<=int((session['y1']+session['w1'])*(64/43))):
                 pass
             else:
                 if img1mode == 'mag':
                     img1_mag[x][y] = 1
                 elif img1mode == 'phase':
                     img1_phase[x][y] = 0
-    
+                    
     for i in range(0,img2_mag.shape[0]):
         for j in range(0,img2_mag.shape[1]):
-            if (i>=session['x2'] and i<=session['x2']+session['h2'])and(
-                j>=session['y2'] and j<=session['y2']+session['w2']):
+            if (i>=int(session['x2']*(61/41)) and i<=int((session['x2']+session['h2'])*(61/41)))and(
+                j>=int(session['y2']*(64/43)) and j<=int((session['y2']+session['w2'])*(64/43))):
                 pass 
             else:
                 if img2mode == 'mag':
