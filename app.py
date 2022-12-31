@@ -3,10 +3,11 @@ from PIL import Image
 from flask import send_file
 import numpy as np
 import matplotlib.pyplot as plt
-app = Flask(__name__)
 from werkzeug.utils import secure_filename
 import os
 import cv2
+
+app = Flask(__name__)
 
 def extract_info(filename,filepath):
     img = cv2.imread(filepath,0)
