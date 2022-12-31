@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
-class Functions:
+class Image:
     def __init__(self, filename, filepath):
         self.filename=filename
         self.filepath=filepath
@@ -15,7 +15,7 @@ class Functions:
 
     def getmag(self,img_fft):
         img_amplitude = np.sqrt(np.real(img_fft)** 2 + np.imag(img_fft) ** 2)
-        magpath = (f"static/images/{self.ilename}_mag.jpg")
+        magpath = (f"static/images/{self.filename}_mag.jpg")
         plt.imsave(magpath ,
                    np.log(img_amplitude+1e-10), cmap='gray')
         return magpath
