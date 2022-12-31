@@ -6,6 +6,26 @@ let img1_phase;
 let img2_Mag;
 let img2_phase;
 
+var merge=function(){
+	selectbox1=document.getElementById("inputState1").value;
+	selectbox2=document.getElementById("inputState2").value;
+	console.log(selectbox1,selectbox2);
+	var xhr=new XMLHttpRequest();
+    var fd=new FormData();
+	fd.append("requestinfo","merge" );
+	fd.append("img1mode", selectbox1);
+	fd.append("img2mode", selectbox2);
+	xhr.open("POST","/",true);
+	xhr.send(fd);
+	xhr.onload=function(e) {
+		if(this.readyState === 4) {
+			console.log("Server returned: ",e.target.responseText);
+			var result = document.getElementById('result');
+			result.src=e.target.responseText;
+		};};
+
+	};
+
 var changeimg1src=function(){
 	selectbox1=document.getElementById("inputState1");
 	console.log( selectbox1.value);
@@ -167,7 +187,7 @@ var loadFile2 = function(event) {
 	
 	
 		};
-	
+
 		
 	
 
