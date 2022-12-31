@@ -40,9 +40,10 @@
                         <input type="file" class="form-control uploader" id="customFile" onchange="loadFile1(event)" />
                     </div>
                     <div class="col">
-                        <select id="inputState1" class="form-control">
-                            <option selected>Magnitude</option>
-                            <option>Phase</option>
+                        <select id="inputState1" class="form-control" onchange="changeimg1src()">
+                            <option value="mag" selected="selected">Magnitude</option>
+                            <option value="phase">phase</option>
+                            
                         </select>
                     </div>
                 </div>
@@ -62,9 +63,9 @@
                         <input type="file" class="form-control uploader" id="customFile2" onchange="loadFile2(event)" />
                     </div>
                     <div class="col">
-                        <select id="inputState2" class="form-control">
-                            <option selected>Phase</option>
-                            <option>Magnitude</option>
+                        <select id="inputState2" class="form-control" onchange="changeimg2src()">
+                            <option value="phase" selected="selected">Phase</option>
+                            <option value="mag">Magnitude</option>
                         </select>
                     </div>
                 </div>

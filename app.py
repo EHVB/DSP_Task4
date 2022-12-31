@@ -28,14 +28,14 @@ def home():
         filepath = os.path.join('static/images', filename)
         image1.save(filepath)
         mag_path1,phase_path1 = extract_info(filename,filepath)
-        return (mag_path1)
+        return (mag_path1) +"|" + phase_path1
     elif request.method=='POST' and request.form['requestinfo']== 'image2':
         image2 = request.files['image2']
         filename = secure_filename(image2.filename) # save file 
         filepath = os.path.join('static/images', filename)
         image2.save(filepath)
         mag_path2,phase_path2 = extract_info(filename,filepath)
-        return (phase_path2)
+        return (phase_path2) + "|" + mag_path2
     elif request.method=='POST' and request.form['requestinfo']== 'crop1pos': 
         x=request.form['x'] 
         y=request.form['y']
@@ -43,6 +43,13 @@ def home():
         h=request.form['h']
         print(int(float(x)),int(float(y)),int(float(w)),int(float(h)))
         return("crop pos recieved")
+    elif request.method=='POST' and request.form['requestinfo']== 'crop2pos': 
+        x=request.form['x'] 
+        y=request.form['y']
+        w=request.form['w']
+        h=request.form['h']
+        print(int(float(x)),int(float(y)),int(float(w)),int(float(h)))
+        return("crop pos2 recieved")
 
     else:
         return (render_template('index.html'))

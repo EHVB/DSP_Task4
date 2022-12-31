@@ -1,6 +1,43 @@
 
 let crop1;
 let crop2; 
+let img1_Mag;
+let img1_phase;
+let img2_Mag;
+let img2_phase;
+
+var changeimg1src=function(){
+	selectbox1=document.getElementById("inputState1");
+	console.log( selectbox1.value);
+	var image4 = document.getElementById('img4');
+	if (selectbox1.value=="phase"){
+		image4.src=img1_phase;
+	} else {
+		console.log("else cond");
+		console.log(img1_Mag);
+		image4.src=img1_Mag;
+		
+	};
+	
+
+};
+
+var changeimg2src=function(){
+	selectbox2=document.getElementById("inputState2");
+	console.log( selectbox2.value);
+	var image3 = document.getElementById('img3');
+	if (selectbox2.value=="phase"){
+		image4.src=img2_phase;
+	} else{
+		image3.src=img2_Mag;
+	};
+	
+
+};
+
+
+
+
 
 var loadFile1 = function(event) {
 	console.log(event.target.files.length);
@@ -28,8 +65,14 @@ var loadFile1 = function(event) {
 			console.log("Server returned: ",e.target.responseText);
 			var image4 = document.getElementById('img4');
 			console.log(e.target.responseText.length);
-			response=e.target.responseText;		  
-			image4.src=response;
+			response=e.target.responseText;	
+			split_paths=response.split("|");
+			img1_Mag=split_paths[0];
+			img1_phase=split_paths[1];
+			console.log(img1_Mag,img1_phase);
+
+
+			image4.src=img1_Mag;
 			
 
 		}
@@ -48,7 +91,8 @@ crop1.listen('crop.change',(widget,e) => {
 	xhr.send(fd);
 	xhr.onload=function(e) {
 		if(this.readyState === 4) {
-			console.log("Server returned: ",e.target.responseText);		
+			console.log("Server returned: ",e.target.responseText);	
+			console.log(crop1.active.pos);	
 
 		}
 	};
@@ -56,9 +100,12 @@ crop1.listen('crop.change',(widget,e) => {
 	});
 
 
+
 	};
 
 	};
+
+	
 var loadFile2 = function(event) {
 	console.log(event.target.files.length);
  	var image = document.getElementById('img2');
@@ -83,15 +130,48 @@ var loadFile2 = function(event) {
 			console.log("Server returned: ",e.target.responseText);
 			var image3 = document.getElementById('img3');
 			console.log(e.target.responseText.length);
-			response=e.target.responseText;		  
-			image3.src=response;
+			response=e.target.responseText;	
+			split_paths=response.split("|");
+			img2_Mag=split_paths[1];
+			img2_phase=split_paths[0];
+			console.log(img2_Mag,img2_phase);	  
+			image3.src=img2_phase;
 	
 
 
 		}
 	};
+	crop2.listen('crop.change',(widget,e) => {
+		console.log(widget.pos);
+		console.log(widget.pos.x);
+		var xhr=new XMLHttpRequest();
+		var fd=new FormData();
+		fd.append("requestinfo", 'crop2pos')
+		fd.append("x",widget.pos.x)
+		fd.append("y",widget.pos.y)
+		fd.append("w",widget.pos.w)
+		fd.append("h",widget.pos.h)
+		
+		xhr.open("POST","/",true);
+		xhr.send(fd);
+		xhr.onload=function(e) {
+			if(this.readyState === 4) {
+				console.log("Server returned: ",e.target.responseText);	
+				console.log(crop2.active.pos);	
+	
+			}
+		};
+	
+		});
+	
+	
+	
+		};
+	
+		
+	
 
 
-};
+
 	
 
