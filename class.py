@@ -8,14 +8,14 @@ class Functions:
     def getmag(filename,img_fft):
         img_amplitude = np.sqrt(np.real(img_fft)** 2 + np.imag(img_fft) ** 2)
         magpath = (f"static/images/{filename}_mag.jpg")
-        plt.imsave(f"static/images/{magpath}_mag.jpg",
+        plt.imsave(f "magpath" ,
                    np.log(img_amplitude+1e-10), cmap='gray')
         return magpath
 
     def getphase(filename,img_fft):
         img_phase = np.arctan2(np.imag(img_fft), np.real(img_fft))
         phasepath = (f"static/images/{filename}_phase.jpg")
-        plt.imsave(f"static/images/{phasepath}_phase.jpg", img_phase, cmap='gray')
+        plt.imsave(f"phasepath", img_phase, cmap='gray')
         return phasepath
 
 
