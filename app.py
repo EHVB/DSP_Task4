@@ -25,17 +25,17 @@ def home():
     if request.method=='POST' and request.form['requestinfo']== 'image1':
         image1 = request.files['image1']
         filename = secure_filename(image1.filename) # save file 
-        filepath = os.path.join('static/images', filename);
+        filepath = os.path.join('static/images', filename)
         image1.save(filepath)
-        mag_path,phase_path = extract_info(filename,filepath)
-        return (mag_path)
+        mag_path1,phase_path1 = extract_info(filename,filepath)
+        return (mag_path1)
     elif request.method=='POST' and request.form['requestinfo']== 'image2':
         image2 = request.files['image2']
         filename = secure_filename(image2.filename) # save file 
-        filepath = os.path.join('static/images', filename);
+        filepath = os.path.join('static/images', filename)
         image2.save(filepath)
-        mag_path,phase_path = extract_info(filename,filepath)
-        return (phase_path)
+        mag_path2,phase_path2 = extract_info(filename,filepath)
+        return (phase_path2)
     elif request.method=='POST' and request.form['requestinfo']== 'crop1pos': 
         x=request.form['x'] 
         y=request.form['y']
