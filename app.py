@@ -3,13 +3,12 @@ from PIL import Image
 from flask import send_file
 import numpy as np
 import matplotlib.pyplot as plt
-app = Flask(__name__)
-app.secret_key = 'Highly secure key // random'
 from werkzeug.utils import secure_filename
 import os
 import cv2
 
 app = Flask(__name__)
+app.secret_key = 'Highly secure key // random'
 
 def extract_info(filename,filepath):
     img = cv2.imread(filepath,0)
