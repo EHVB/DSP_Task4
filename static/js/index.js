@@ -7,7 +7,16 @@ var loadFile1 = function(event) {
  	var image = document.getElementById('img1');
 	image.src = URL.createObjectURL(event.target.files[0]);
 	var image4 = document.getElementById('img4');
-	crop1= Jcrop.attach(image4);	
+	console.log(typeof crop1);
+	if (typeof crop1 !=="undefined" ) {
+		crop1.destroy();
+		crop1= Jcrop.attach(image4);
+
+	} else {
+		crop1= Jcrop.attach(image4);
+	};
+		
+	console.log(typeof crop1);
 	var xhr=new XMLHttpRequest();
     var fd=new FormData();
 	fd.append("image1",event.target.files[0],event.target.files[0].filename);
@@ -28,14 +37,19 @@ var loadFile1 = function(event) {
 	};
 
 	};
-
 var loadFile2 = function(event) {
 	console.log(event.target.files.length);
  	var image = document.getElementById('img2');
 	image.src = URL.createObjectURL(event.target.files[0]);
 	var image3 = document.getElementById('img3');
 	console.log(event.target.id)
-	crop2= Jcrop.attach(image3);	
+	if (typeof crop2 !=="undefined" ) {
+		crop2.destroy();
+		crop2= Jcrop.attach(image3);
+
+	} else {
+		crop2= Jcrop.attach(image3);
+	};	
 	var xhr=new XMLHttpRequest();
     var fd=new FormData();
 	fd.append("image2",event.target.files[0],event.target.files[0].filename);
