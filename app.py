@@ -1,11 +1,8 @@
 from flask import Flask, render_template, request , session
-from PIL import Image
-from flask import send_file
 import numpy as np
 import matplotlib.pyplot as plt
 from werkzeug.utils import secure_filename
 import os
-import cv2
 from ImageClass import Image
 
 app = Flask(__name__)
