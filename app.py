@@ -9,6 +9,8 @@ from werkzeug.utils import secure_filename
 import os
 import cv2
 
+app = Flask(__name__)
+
 def extract_info(filename,filepath):
     img = cv2.imread(filepath,0)
     img_fft = np.fft.fftshift(np.fft.fft2(img))
