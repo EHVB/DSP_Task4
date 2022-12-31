@@ -27,7 +27,7 @@ var changeimg2src=function(){
 	console.log( selectbox2.value);
 	var image3 = document.getElementById('img3');
 	if (selectbox2.value=="phase"){
-		image4.src=img2_phase;
+		image3.src=img2_phase;
 	} else{
 		image3.src=img2_Mag;
 	};
