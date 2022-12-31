@@ -10,6 +10,10 @@ from ImageClass import Image
 
 app = Flask(__name__)
 app.secret_key = 'Highly secure key // random'
+img1mag = []
+img1phase = []
+img2mag = []
+img2phase = []
 
 # def extract_info(filename,filepath):
 #     img = cv2.imread(filepath,0)
@@ -23,10 +27,14 @@ app.secret_key = 'Highly secure key // random'
 #     return magpath,phasepath
 
 def merge(img1mode,img2mode):
-    img1_mag = cv2.imread(session['mag_path1'])
-    img1_phase = cv2.imread(session['phase_path1'])
-    img2_mag = cv2.imread(session['mag_path2'])
-    img2_phase = cv2.imread(session['phase_path1'])
+    global img1_mag
+    global img1phase
+    global img2mag
+    global img2phase
+    img1_mag = img1mag
+    img1_phase = img1phase
+    img2_mag = img2mag
+    img2_phase = img2phase
     
    
     for x in range (0,img1_mag.shape[0]):
@@ -58,7 +66,7 @@ def merge(img1mode,img2mode):
     
     result = np.real(np.fft.ifft2(np.fft.ifftshift(img)))
     resultPath = 'static/images/result.jpg'
-    plt.imsave(resultPath,result,cmap='gray')
+    plt.imsave('static/images/result.jpg', result, cmap="gray")
     return resultPath
 
 
@@ -73,10 +81,10 @@ def home():
         # mag_path1,phase_path1 = extract_info(session['image1name'],session['image1path'])
         img1 = Image(session['image1name'],session['image1path'])
         img1_fft = img1.getfft()
-        mag_path1 = img1.getmag(img1_fft)
-        session['mag_path1'] = mag_path1
-        phase_path1 = img1.getphase(img1_fft)
-        session['phase_path1'] = phase_path1
+        global img1mag
+        mag_path1, img1mag = img1.getmag(img1_fft)
+        global img1phase
+        phase_path1,img1phase = img1.getphase(img1_fft)
         
         return (mag_path1) +"|" + phase_path1
     
@@ -91,10 +99,10 @@ def home():
         # mag_path2,phase_path2 = extract_info(session['image2name'],session['image2path'])
         img2 = Image(session['image2name'],session['image2path'])
         img2_fft = img2.getfft()
-        mag_path2 = img2.getmag(img2_fft)
-        session['mag_path2'] = mag_path2
-        phase_path2 = img2.getphase(img2_fft)
-        session['phase_path2'] = phase_path2
+        global img2mag
+        mag_path2,img2mag = img2.getmag(img2_fft)
+        global img2phase
+        phase_path2,img2phase = img2.getphase(img2_fft)
         
         return (phase_path2) + "|" + mag_path2
     
