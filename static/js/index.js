@@ -30,10 +30,32 @@ var loadFile1 = function(event) {
 			console.log(e.target.responseText.length);
 			response=e.target.responseText;		  
 			image4.src=response;
-	
-
+			
 
 		}
+crop1.listen('crop.change',(widget,e) => {
+	console.log(widget.pos);
+	console.log(widget.pos.x);
+	var xhr=new XMLHttpRequest();
+	var fd=new FormData();
+	fd.append("requestinfo", 'crop1pos')
+	fd.append("x",widget.pos.x)
+	fd.append("y",widget.pos.y)
+	fd.append("w",widget.pos.w)
+	fd.append("h",widget.pos.h)
+	
+	xhr.open("POST","/",true);
+	xhr.send(fd);
+	xhr.onload=function(e) {
+		if(this.readyState === 4) {
+			console.log("Server returned: ",e.target.responseText);		
+
+		}
+	};
+
+	});
+
+
 	};
 
 	};
