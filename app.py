@@ -35,7 +35,14 @@ def home():
         filepath = os.path.join('static/images', filename);
         image2.save(filepath)
         mag_path,phase_path = extract_info(filename,filepath)
-        return (phase_path) 
+        return (phase_path)
+    elif request.method=='POST' and request.form['requestinfo']== 'crop1pos': 
+        x=request.form['x'] 
+        y=request.form['y']
+        w=request.form['w']
+        h=request.form['h']
+        print(int(float(x)),int(float(y)),int(float(w)),int(float(h)))
+        return("crop pos recieved")
 
     else:
         return (render_template('index.html'))
