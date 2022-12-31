@@ -1,12 +1,16 @@
 .image {
-    max-width: 415px;
-    max-height: 415px;
+    max-width: 430px;
+    max-height: 430px;
     /* margin-bottom: 30px; */
 }
 
 .uploader {
     width: 107px;
 }
+
+/* body {
+    background-color: #C9D6DF;
+} */
 
 /* .text-top {
     margin-bottom: 50px;
@@ -21,6 +25,7 @@
 #result {
     padding-top: 100px;
     justify-content: center;
+    margin-right: 20px;
 
 }
 
@@ -28,11 +33,15 @@
     width: 700px;
 }
 
-.container {
-    width: 10000px;
-    margin: 10px;
-    margin-right: 0px;
+#merge {
+    margin-top: 296px;
+    width: 100%;
 }
+
+/* .container-fluid {
+    margin-left: 0px;
+    margin-right: 10px;
+} */
 
 .text-center {
     margin-top: 10px;
@@ -52,5 +61,5 @@ h1 {
 
 hr {
     height: 5px;
-    background-color: blue;
+    background-color: #1E2022;
 }
