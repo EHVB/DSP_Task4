@@ -13,39 +13,71 @@ img1mag = []
 img1phase = []
 img2mag = []
 img2phase = []
+img1 = 0
+img2 = 0
 
 
-def merge(img1mode, img2mode):
+def merge(img1mode, img2mode, high):
     global img1_mag
     global img1phase
     global img2mag
     global img2phase
+    global img1
+    global img2
     img1_mag = copy.copy(img1mag)
     img1_phase = copy.copy(img1phase)
     img2_mag = copy.copy(img2mag)
     img2_phase = copy.copy(img2phase)
 
-    for x in range(0, img1_mag.shape[0]):
-        for y in range(0, img1_mag.shape[1]):
-            if (x >= int(session['x1']*(61/41)) and x <= int((session['x1']+session['h1'])*(61/41))) and (
-                    y >= int(session['y1']*(64/43)) and y <= int((session['y1']+session['w1'])*(64/43))):
-                pass
-            else:
-                if img1mode == 'mag':
-                    img1_mag[x][y] = 1
-                elif img1mode == 'phase':
-                    img1_phase[x][y] = 0
+    img1.crop_pos(session['x1'], session['y1'],
+                  session['w1'], session['h1'])
 
-    for i in range(0, img2_mag.shape[0]):
-        for j in range(0, img2_mag.shape[1]):
-            if (i >= int(session['x2']*(61/41)) and i <= int((session['x2']+session['h2'])*(61/41))) and (
-                    j >= int(session['y2']*(64/43)) and j <= int((session['y2']+session['w2'])*(64/43))):
-                pass
-            else:
-                if img2mode == 'mag':
-                    img2_mag[i][j] = 1
-                elif img2mode == 'phase':
-                    img2_phase[i][j] = 0
+    img2.crop_pos(session['x2'], session['y2'],
+                  session['w2'], session['h2'])
+
+    # for x in range(0, img1_mag.shape[0]):
+    #     for y in range(0, img1_mag.shape[1]):
+    #         if (x >= int(session['x1']*(61/41)) and x <= int((session['x1']+session['h1'])*(61/41))) and (
+    #                 y >= int(session['y1']*(64/43)) and y <= int((session['y1']+session['w1'])*(64/43))):
+    #             pass
+    #         else:
+    #             if img1mode == 'mag':
+    #                 img1_mag[x][y] = 1
+    #             elif img1mode == 'phase':
+    #                 img1_phase[x][y] = 0
+
+    # for i in range(0, img2_mag.shape[0]):
+    #     for j in range(0, img2_mag.shape[1]):
+    #         if (i >= int(session['x2']*(61/41)) and i <= int((session['x2']+session['h2'])*(61/41))) and (
+    #                 j >= int(session['y2']*(64/43)) and j <= int((session['y2']+session['w2'])*(64/43))):
+    #             pass
+    #         else:
+    #             if img2mode == 'mag':
+    #                 img2_mag[i][j] = 1
+    #             elif img2mode == 'phase':
+    #                 img2_phase[i][j] = 0
+
+    if high == "true":
+        if img1mode == 'mag':
+            img1_mag = img1.crop_high(img1mode,img1_mag,img1_phase)
+        elif img1mode == 'phase':
+            img1_phase = img1.crop_high(img1mode,img1_mag,img1_phase)
+
+        if img2mode == 'mag':
+            img2_mag = img2.crop_high(img2mode,img2_mag,img2_phase)
+        elif img2mode == 'phase':
+            img2_phase = img2.crop_high(img2mode,img2_mag,img2_phase)
+
+    else:
+        if img1mode == 'mag':
+            img1_mag = img1.crop_low(img1mode,img1_mag,img1_phase)
+        elif img1mode == 'phase':
+            img1_phase = img1.crop_low(img1mode,img1_mag,img1_phase)
+
+        if img2mode == 'mag':
+            img2_mag = img2.crop_low(img2mode,img2_mag,img2_phase)
+        elif img2mode == 'phase':
+            img2_phase = img2.crop_low(img2mode,img2_mag,img2_phase)
 
     if img1mode == 'mag' and img2mode == 'phase':
         img = np.multiply(img1_mag, np.exp(1j * img2_phase))
@@ -68,6 +100,7 @@ def home():
             'static/images', session['image1name'])
         print(session['image1path'])
         image1.save(session['image1path'])
+        global img1
         img1 = Image(session['image1name'], session['image1path'])
         img1_fft = img1.getfft()
         global img1mag
@@ -85,6 +118,7 @@ def home():
             'static/images', session['image2name'])
         print(session['image2path'])
         image2.save(session['image2path'])
+        global img2
         img2 = Image(session['image2name'], session['image2path'])
         img2_fft = img2.getfft()
         global img2mag
@@ -100,6 +134,7 @@ def home():
         session['w1'] = int(float(request.form['w']))
         session['h1'] = int(float(request.form['h']))
         print(session['x1'], session['y1'], session['w1'], session['h1'])
+
         return("crop pos recieved")
 
     elif request.method == 'POST' and request.form['requestinfo'] == 'crop2pos':
@@ -108,6 +143,7 @@ def home():
         session['w2'] = int(float(request.form['w']))
         session['h2'] = int(float(request.form['h']))
         print(session['x2'], session['y2'], session['w2'], session['h2'])
+
         return("crop pos2 recieved")
 
     elif request.method == 'POST' and request.form['requestinfo'] == 'merge':
@@ -116,10 +152,12 @@ def home():
               session['x1'], session['y2'], session['y1'])
         img1mode = request.form['img1mode']
         img2mode = request.form['img2mode']
+        high = request.form['high']
+        print(high, type(high))
         # mode is either mag'' or 'phase' __ case sensitive
         # call merge here
 
-        resultnewpath = merge(img1mode, img2mode)
+        resultnewpath = merge(img1mode, img2mode, high)
 
         return(resultnewpath)
 
