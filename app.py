@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 from ImageClass import Image
 import random
+import copy
 
 app = Flask(__name__)
 app.secret_key = 'Highly secure key // random'
@@ -29,10 +30,10 @@ def merge(img1mode,img2mode):
     global img1phase
     global img2mag
     global img2phase
-    img1_mag = img1mag
-    img1_phase = img1phase
-    img2_mag = img2mag
-    img2_phase = img2phase
+    img1_mag = copy.copy(img1mag)
+    img1_phase = copy.copy(img1phase)
+    img2_mag = copy.copy(img2mag)
+    img2_phase = copy.copy(img2phase)
     
    
     for x in range (0,img1_mag.shape[0]):
