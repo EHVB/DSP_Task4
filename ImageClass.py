@@ -36,7 +36,7 @@ class Image:
         self.w = w
         self.h = h
 
-    def crop_low(self, mode, img_mag, img_phase):
+    def crop_low(self, mode, img_mag, img_phase,high):
         h_ratio = 61/41
         w_ratio = 64/43
         mag_mask = np.ones((img_mag.shape[0], img_mag.shape[1]))
@@ -53,20 +53,17 @@ class Image:
                 for j in range(int(self.x*w_ratio), (int((self.x+self.w)*w_ratio))):
                     # print(i,j)
                     phase_mask[i][j] = img_phase[i][j]
-
-        # if mode == 'mag':
-        #     for i in range(170, 470):
-        #         for j in range(63, 363):
-        #             mag_mask[i][j] = img_mag[i][j]
-        # elif mode == 'phase':
-        #     for i in range(170, 470):
-        #         for j in range(63, 363):
-        #             phase_mask[i][j] = img_phase[i][j]
-
-        if mode == 'mag':
-            return mag_mask
-        elif mode == 'phase':
-            return phase_mask
+        
+        if high == 'true':
+            if mode == 'mag':
+                return img_mag-mag_mask
+            elif mode == 'phase':
+                return img_phase-phase_mask
+        else:
+            if mode == 'mag':
+                return mag_mask
+            elif mode == 'phase':
+                return phase_mask
 
     def crop_high(self, mode, img_mag, img_phase):
         h_ratio = 61/41

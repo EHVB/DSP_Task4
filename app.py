@@ -57,27 +57,28 @@ def merge(img1mode, img2mode, high):
     #             elif img2mode == 'phase':
     #                 img2_phase[i][j] = 0
 
-    if high == "true":
-        if img1mode == 'mag':
-            img1_mag = img1.crop_high(img1mode,img1_mag,img1_phase)
-        elif img1mode == 'phase':
-            img1_phase = img1.crop_high(img1mode,img1_mag,img1_phase)
+    # if high == "true":
+    #     if img1mode == 'mag':
+    #         img1_mag = img1.crop_high(img1mode,img1_mag,img1_phase)
+    #     elif img1mode == 'phase':
+    #         img1_phase = img1.crop_high(img1mode,img1_mag,img1_phase)
 
-        if img2mode == 'mag':
-            img2_mag = img2.crop_high(img2mode,img2_mag,img2_phase)
-        elif img2mode == 'phase':
-            img2_phase = img2.crop_high(img2mode,img2_mag,img2_phase)
+    #     if img2mode == 'mag':
+    #         img2_mag = img2.crop_high(img2mode,img2_mag,img2_phase)
+    #     elif img2mode == 'phase':
+    #         img2_phase = img2.crop_high(img2mode,img2_mag,img2_phase)
 
-    else:
-        if img1mode == 'mag':
-            img1_mag = img1.crop_low(img1mode,img1_mag,img1_phase)
-        elif img1mode == 'phase':
-            img1_phase = img1.crop_low(img1mode,img1_mag,img1_phase)
+    # else:
+    if img1mode == 'mag':
+        img1_mag = img1.crop_low(img1mode,img1_mag,img1_phase,high)
+    elif img1mode == 'phase':
+        img1_phase = img1.crop_low(img1mode,img1_mag,img1_phase,high)
 
-        if img2mode == 'mag':
-            img2_mag = img2.crop_low(img2mode,img2_mag,img2_phase)
-        elif img2mode == 'phase':
-            img2_phase = img2.crop_low(img2mode,img2_mag,img2_phase)
+    if img2mode == 'mag':
+        img2_mag = img2.crop_low(img2mode,img2_mag,img2_phase,high)
+    elif img2mode == 'phase':
+        img2_phase = img2.crop_low(img2mode,img2_mag,img2_phase,high)
+
 
     if img1mode == 'mag' and img2mode == 'phase':
         img = np.multiply(img1_mag, np.exp(1j * img2_phase))
