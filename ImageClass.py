@@ -14,11 +14,11 @@ class Image:
 
 
     def getmag(self,img_fft):
-        img_amplitude = np.sqrt(np.real(img_fft)** 2 + np.imag(img_fft) ** 2)
+        img_mag = np.sqrt(np.real(img_fft)** 2 + np.imag(img_fft) ** 2)
         magpath = (f"static/images/{self.filename}_mag.jpg")
         plt.imsave(magpath ,
-                   np.log(img_amplitude+1e-10), cmap='gray')
-        return magpath,img_amplitude
+                   np.log(img_mag+1e-10), cmap='gray')
+        return magpath,img_mag
 
     def getphase(self,img_fft):
         img_phase = np.arctan2(np.imag(img_fft), np.real(img_fft))

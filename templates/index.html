@@ -12,12 +12,14 @@
         crossorigin="anonymous"></script>
     <title>Image Processing</title>
     <link rel="stylesheet" href="../static/css/index.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js" integrity="sha512-nO7wgHUoWPYGCNriyGzcFwPSF+bPDOR+NvtOYy2wMcWkrnCNPKBcFEkU80XIN14UVja0Gdnff9EmydyLlOL7mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js"
+        integrity="sha512-nO7wgHUoWPYGCNriyGzcFwPSF+bPDOR+NvtOYy2wMcWkrnCNPKBcFEkU80XIN14UVja0Gdnff9EmydyLlOL7mQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://unpkg.com/jcrop/dist/jcrop.css">
-    <script src="https://unpkg.com/jcrop"></script> 
+    <script src="https://unpkg.com/jcrop"></script>
 
     <script src="{{url_for('static', filename='js/index.js')}}"></script>
-    
+
 </head>
 
 <body>
@@ -32,8 +34,8 @@
             <div class="col-sm">
                 <div class="text-top">
                     <div>
-                    <img src="../static/images/img5.jpg" class="rounded image" id="img1"  alt="...">
-                </div>
+                        <img src="../static/images/img5.jpg" class="rounded image" id="img1" alt="...">
+                    </div>
                 </div>
                 <div class="row text-center">
                     <div class="col">
@@ -43,13 +45,13 @@
                         <select id="inputState1" class="form-control" onchange="changeimg1src()">
                             <option value="mag" selected="selected">Magnitude</option>
                             <option value="phase">phase</option>
-                            
+
                         </select>
                     </div>
                 </div>
                 <div class="text-bottom">
                     <div>
-                    <img src="../static/images/front/img_mag.jpg" class="rounded image" alt="..." id="img4">
+                        <img src="../static/images/front/img_mag.jpg" class="rounded image" alt="..." id="img4">
                     </div>
                 </div>
             </div>
@@ -74,8 +76,11 @@
                 </div>
             </div>
 
-            <div class="col-sm">
-                <button type="button" class="btn btn-outline-secondary btn-rounded" id="merge" onclick="merge()">Merge</button>
+            <div class="col-sm" id='process'>
+                <label for="high" id='label'>Highpass: </label>
+                <input type="checkbox" id="high" name="high" value="high">
+                <button type="button" class="btn btn-outline-secondary btn-rounded" id="merge"
+                    onclick="merge()">Merge</button>
             </div>
 
             <div class="col-sm">
@@ -90,4 +95,5 @@
         </div>
     </div>
 </body>
+
 </html>
