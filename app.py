@@ -14,16 +14,6 @@ img1phase = []
 img2mag = []
 img2phase = []
 
-# def extract_info(filename,filepath):
-#     img = cv2.imread(filepath,0)
-#     img_fft = np.fft.fftshift(np.fft.fft2(img))
-#     img_amplitude = np.sqrt(np.real(img_fft) ** 2 + np.imag(img_fft) ** 2)
-#     img_phase = np.arctan2(np.imag(img_fft), np.real(img_fft))
-#     plt.imsave(f"static/images/{filename}_mag.jpg",np.log(img_amplitude+1e-10), cmap='gray') 
-#     plt.imsave(f"static/images/{filename}_phase.jpg",img_phase, cmap='gray')
-#     magpath=(f"static/images/{filename}_mag.jpg")
-#     phasepath=(f"static/images/{filename}_phase.jpg")
-#     return magpath,phasepath
 
 def merge(img1mode,img2mode):
     global img1_mag
@@ -78,7 +68,6 @@ def home():
         session['image1path'] = os.path.join('static/images', session['image1name'] )
         print(session['image1path'] )
         image1.save(session['image1path'])
-        # mag_path1,phase_path1 = extract_info(session['image1name'],session['image1path'])
         img1 = Image(session['image1name'],session['image1path'])
         img1_fft = img1.getfft()
         global img1mag
@@ -96,7 +85,6 @@ def home():
         session['image2path'] = os.path.join('static/images', session['image2name'])
         print(session['image2path'] ) 
         image2.save(session['image2path'])
-        # mag_path2,phase_path2 = extract_info(session['image2name'],session['image2path'])
         img2 = Image(session['image2name'],session['image2path'])
         img2_fft = img2.getfft()
         global img2mag
@@ -112,7 +100,6 @@ def home():
         session['y1']=int(float(request.form['y'] ))
         session['w1']=int(float(request.form['w'] ))
         session['h1']=int(float(request.form['h'] ))
-        #print(int(float(x)),int(float(y)),int(float(w)),int(float(h)))
         print(session['x1'],session['y1'],session['w1'],session['h1'])
         return("crop pos recieved")
     
@@ -123,7 +110,6 @@ def home():
        session['w2']=int(float(request.form['w'] ))
        session['h2']=int(float(request.form['h'] ))
        print(session['x2'],session['y2'],session['w2'],session['h2'])
-       # print(int(float(x)),int(float(y)),int(float(w)),int(float(h)))
        return("crop pos2 recieved")
    
     
