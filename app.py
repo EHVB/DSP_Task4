@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from werkzeug.utils import secure_filename
 import os
 from ImageClass import Image
+import random
 
 app = Flask(__name__)
 app.secret_key = 'Highly secure key // random'
@@ -62,8 +63,9 @@ def merge(img1mode,img2mode):
         img = np.multiply(img2_mag, np.exp(1j * img1_phase))
     
     result = np.real(np.fft.ifft2(np.fft.ifftshift(img)))
-    resultPath = 'static/images/result.jpg'
-    plt.imsave('static/images/result.jpg', result, cmap="gray")
+    rand = random.randint(0,1000)
+    resultPath = f'static/images/results/result{rand}.jpg'
+    plt.imsave(resultPath, result, cmap="gray")
     return resultPath
 
 
