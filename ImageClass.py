@@ -36,7 +36,7 @@ class Image:
         self.w = w
         self.h = h
 
-    def crop_low(self, mode, img_mag, img_phase,high):
+    def crop_low(self, mode, img_mag, img_phase):
         h_ratio = 61/41
         w_ratio = 64/43
         mag_mask = np.ones((img_mag.shape[0], img_mag.shape[1]))
@@ -54,16 +54,11 @@ class Image:
                     # print(i,j)
                     phase_mask[i][j] = img_phase[i][j]
         
-        if high == 'true':
-            if mode == 'mag':
-                return img_mag-mag_mask
-            elif mode == 'phase':
-                return img_phase-phase_mask
-        else:
-            if mode == 'mag':
-                return mag_mask
-            elif mode == 'phase':
-                return phase_mask
+
+        if mode == 'mag':
+            return mag_mask
+        elif mode == 'phase':
+            return phase_mask
 
     def crop_high(self, mode, img_mag, img_phase):
         h_ratio = 61/41
@@ -73,23 +68,23 @@ class Image:
 
         print('entered HIGH')
 
-        if mode == 'mag':
-            for i in range(int(self.y*h_ratio), (int((self.y+self.h)*h_ratio))):
-                for j in range(int(self.x*w_ratio), (int((self.x+self.w)*w_ratio))):
-                    img_mag[i][j] = mag_mask[i][j]
-        elif mode == 'phase':
-            for i in range(int(self.y*h_ratio), (int((self.y+self.h)*h_ratio))):
-                for j in range(int(self.x*w_ratio), (int((self.x+self.w)*w_ratio))):
-                    img_phase[i][j] = phase_mask[i][j]
-
         # if mode == 'mag':
-        #     for i in range(170, 470):
-        #         for j in range(63, 363):
+        #     for i in range(int(self.y*h_ratio), (int((self.y+self.h)*h_ratio))):
+        #         for j in range(int(self.x*w_ratio), (int((self.x+self.w)*w_ratio))):
         #             img_mag[i][j] = mag_mask[i][j]
         # elif mode == 'phase':
-        #     for i in range(170, 470):
-        #         for j in range(63, 363):
+        #     for i in range(int(self.y*h_ratio), (int((self.y+self.h)*h_ratio))):
+        #         for j in range(int(self.x*w_ratio), (int((self.x+self.w)*w_ratio))):
         #             img_phase[i][j] = phase_mask[i][j]
+
+        if mode == 'mag':
+            for i in range(193, 233):
+                for j in range(300, 340):
+                    img_mag[i][j] = mag_mask[i][j]
+        elif mode == 'phase':
+            for i in range(193, 233):
+                for j in range(300, 340):
+                    img_phase[i][j] = phase_mask[i][j]
 
         if mode == 'mag':
             return img_mag
