@@ -29,7 +29,12 @@
  ## Preview
 #### Adding 2 diferent images and merging the magnitude of the first with the phase of the second.
 
+![Screenshot (383)](https://user-images.githubusercontent.com/93640020/210385210-540bef96-c0fe-4410-b22f-bb18bd2a9e51.png)
 
 #### Applying low pass filter on magnitude.
 
+![Screenshot (384)](https://user-images.githubusercontent.com/93640020/210385282-d0aa52f6-757d-4570-a817-2547f2b967d3.png)
+
 #### Applying high pass filter on magnitude
+
+![Screenshot (385)](https://user-images.githubusercontent.com/93640020/210385308-223d57be-ee6d-4960-9433-8de8ba5cec5a.png)
