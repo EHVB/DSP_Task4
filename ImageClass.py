@@ -42,6 +42,7 @@ class Image:
         mag_mask = np.ones((img_mag.shape[0], img_mag.shape[1]))
         phase_mask = np.zeros((img_mag.shape[0], img_mag.shape[1]))
         print('entered low')
+        print(type(img_mag))
 
         if mode == 'mag':
             for i in range(int(self.y*h_ratio), (int((self.y+self.h)*h_ratio))):

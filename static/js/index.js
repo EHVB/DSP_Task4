@@ -156,8 +156,8 @@ var loadFile2 = function (event) {
 			console.log(e.target.responseText.length);
 			response = e.target.responseText;
 			split_paths = response.split("|");
-			img2_Mag = split_paths[1];
-			img2_phase = split_paths[0];
+			img2_Mag = split_paths[0];
+			img2_phase = split_paths[1];
 			console.log(img2_Mag, img2_phase);
 			image3.src = img2_phase;
 
